@@ -1,0 +1,140 @@
+
+// Following tests can be adapted into your main-function.
+
+//--------------------------------------------------------------------------------------------------------------------------------
+
+/* add_to_front */
+MyDLL dll_obj;
+dll_obj.add_to_front("3");
+dll_obj.add_to_front("2");
+dll_obj.add_to_front("1");
+// expects dll_obj to have 1,2,3
+
+//--------------------------------------------------------------------------------------------------------------------------------
+
+/* clear */
+dll_obj.clear();
+bool b1 = dll_obj.isEmpty(); 
+// expects b1 == true i.e., dll_obj to be empty 
+
+//--------------------------------------------------------------------------------------------------------------------------------
+
+/* add_to_back */
+dll_obj.add_to_back("1");
+dll_obj.add_to_back("2");
+dll_obj.add_to_back("3");
+// expects dll_obj to have 1,2,3
+
+//--------------------------------------------------------------------------------------------------------------------------------
+/* merge */
+
+MyDLL dll_obj_other;
+dll_obj_other.add_to_back("a");
+dll_obj_other.add_to_back("b");
+dll_obj_other.add_to_back("c");
+dll_obj.merge(dll_obj_other);
+bool b2 = dll_obj_other.isEmpty();
+// expects dll_obj to have 1,2,3,a,b,c
+// expects b2 == true i.e., dll_obj_other to be empty 
+
+//--------------------------------------------------------------------------------------------------------------------------------
+/* operator+= */
+
+dll_obj_other.add_to_back("a");
+dll_obj_other.add_to_back("b");
+dll_obj_other.add_to_back("c");
+
+dll_obj += dll_obj_other;
+
+// expects dll_obj to have 1,2,3,a,b,c,a,b,c
+// expects dll_obj_other to have a,b,c i.e., dll_obj_other to be intact 
+// (dll_obj's trailing a,b,c should be stored in distinct mem-address from dll_obj_other's a,b,c )
+//--------------------------------------------------------------------------------------------------------------------------------
+/* operator-= */
+
+MyDLL dll_obj_tmp;
+dll_obj_tmp.add_to_back("1")
+dll_obj_tmp.add_to_back("2")
+dll_obj_tmp.add_to_back("c")
+dll_obj -= dll_obj_copy;         // {1,2,3,a,b,c,a,b,c} -= {1,2,c}
+// expects dll_obj to be {3,a,b,a,b}
+//--------------------------------------------------------------------------------------------------------------------------------
+/* remove */
+MyDLL dll_obj_2;
+dll_obj_2.add_to_back("k_1");
+dll_obj_2.add_to_back("n_1"); 
+dll_obj_2.add_to_back("n_2");
+dll_obj_2.add_to_back("k_2");
+dll_obj_2.add_to_back("k_3");
+dll_obj_2.add_to_back("m_1");
+dll_obj_2.add_to_back("n_3");
+dll_obj_2.add_to_back("n_4");
+dll_obj_2.add_to_back("k_4");
+
+dll_obj_2.remove('k');
+// expects {n_1, n_2, m_1, n_3, n_4}
+dll_obj_2.remove('n');
+// expects {m_1}
+dll_obj_2.remove('m');
+// expects {}
+//--------------------------------------------------------------------------------------------------------------------------------
+/* shift_forward */
+dll_obj_2.add_to_back("k_1");
+dll_obj_2.add_to_back("n_1"); 
+dll_obj_2.add_to_back("n_2");
+dll_obj_2.add_to_back("k_2");
+dll_obj_2.add_to_back("m_1");
+dll_obj_2.add_to_back("k_3");
+dll_obj_2.add_to_back("n_3");
+dll_obj_2.add_to_back("n_4");
+dll_obj_2.add_to_back("k_4");
+
+dll_obj_2.shift_forward('k');
+// expects similar to {k_1,k_2,k_3,k_4, n_1,n_2,m_1,n_3,n_4}  
+// ^ order of two kinds of items (ones begin with char c and ones that don't)
+//   need not be preserved across this operation.
+
+dll_obj_2.shift_forward('n');
+// expects similar to {n_1,n_2,n_3,n_4, k_1,k_2,k_3,k_4,m_1}
+dll_obj_2.shift_forward('m');
+// expects similar to {m_1, n_1,n_2,n_3,n_4,k_1,k_2,k_3,k_4}
+
+dll_obj_2.clear();
+dll_obj_2.add_to_back("k_1");
+dll_obj_2.add_to_back("k_2");
+dll_obj_2.add_to_back("k_3");
+dll_obj_2.add_to_back("k_4");
+
+dll_obj_2.shift_forward('n');
+// expects {k_1,k_2,k_3,k_4}
+
+dll_obj_2.shift_forward('k');
+// expects similar to {k_1,k_2,k_3,k_4}
+
+//--------------------------------------------------------------------------------------------------------------------------------
+/* getNext, reset, finished */
+dll_obj_2.clear();
+
+bool b3 = dll_obj_2.reset(); // expects b3 to be false 
+
+dll_obj_2.add_to_back("k_1");
+dll_obj_2.add_to_back("k_2");
+dll_obj_2.add_to_back("k_3");
+dll_obj_2.add_to_back("k_4");
+
+bool b4 = dll_obj_2.reset(); // expects b4 to be true
+
+string next_val;
+
+bool b5 = dll_obj_2.getNext(next_val); // expects next_val to be k_1, expects b5 to be true
+dll_obj_2.getNext(next_val); // expects next_val to be k_2
+bool b6 = dll_obj_2.finished();	// expects b6 to be false
+dll_obj_2.getNext(next_val); // expects next_val to be k_3
+dll_obj_2.getNext(next_val); // expects next_val to be k_4
+bool b7 = dll_obj_2.finished();	// expects b7 to be true
+
+bool b8 = dll_obj_2.getNext(next_val); // expects next_val to be undefined, expects b8 to be false
+
+dll_obj_2.reset();
+dll_obj_2.getNext(next_val); // expects next_val to be k_1
+
