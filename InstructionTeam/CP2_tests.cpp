@@ -123,8 +123,14 @@ int main() {
     assert(list1.getNext(item) && (item == "Alice" || item == "Bob" || item == "Charlie" || item == "Eve") );
     assert(list1.getNext(item) && (item == "Alice" || item == "Bob" || item == "Charlie" || item == "Eve") );
     assert(list1.getNext(item) && (item == "Alice" || item == "Bob" || item == "Charlie" || item == "Eve") );
-
+    list1.clear();
+	
     //Test iterator
+    list1.add_to_back("David");	
+    list1.add_to_back("Alice");
+    list1.add_to_back("Bob");
+    list1.add_to_back("Charlie");
+    list1.add_to_back("Eve");
     list1.add_to_back("Alpha");
     list1.add_to_back("Beta");
     list1.add_to_back("Gamma");
@@ -142,23 +148,22 @@ int main() {
 
     std::cout << "All tests passed from section 1" << std::endl;
 	
-	//Test case 2 ->
-	//Goal : Test whether 'add_to_back' and 'add_to_front' support a large number of insertions.
+    //Test case 2 ->
+    //Goal : Test whether 'add_to_back' and 'add_to_front' support a large number of insertions.
 	
-	list1.clear();
+    list1.clear();
     list2.clear();
     assert(list1.isEmpty());
     assert(list2.isEmpty());
 	
-	for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < 100; i++) {
 		list1.add_to_front("Item " + std::to_string(i));
-	}
+    }
 
-	for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < 100; i++) {
 		list1.add_to_back("Item " + std::to_string(100 + i));
-	}
-
-	assert(!list1.isEmpty());
+    }
+    assert(!list1.isEmpty());
 
     list1.reset(); // reset to set iterator to first node
     for (int i = 99; i >= 0; i--) {
