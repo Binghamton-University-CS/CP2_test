@@ -31,6 +31,7 @@ int main() {
     list1.add_to_front("Eve");
     list1.add_to_front("Bob");
     assert(!list1.isEmpty());
+    list1.reset(); // reset to set iterator to first node
     assert(list1.getNext(item) && item == "Bob");
     assert(list1.getNext(item) && item == "Eve");
     assert(list1.getNext(item) && item == "Alice");
@@ -43,6 +44,7 @@ int main() {
     list1.add_to_back("Charlie");
     list1.add_to_back("Alice");
     assert(!list1.isEmpty());
+    list1.reset(); // reset to set iterator to first node
     assert(list1.getNext(item) && item == "Bob");
     assert(list1.getNext(item) && item == "Charlie");
     assert(list1.getNext(item) && item == "Alice");
@@ -68,6 +70,7 @@ int main() {
     list2.add_to_back("David");
     list2.add_to_back("Eve");
     list1 += list2;
+    list1.reset(); // reset to set iterator to first node
     assert(list1.getNext(item) && item == "Alice");
     assert(list1.getNext(item) && item == "Bob");
     assert(list1.getNext(item) && item == "David");
@@ -84,6 +87,8 @@ int main() {
     list1.add_to_back("Bob");
     list2.add_to_back("Bob");
     list1 -= list2;
+    list1.reset(); // reset to set iterator to first node
+    list2.reset(); // reset to set iterator to first node
     assert(list1.getNext(item) && item == "Alice");
     assert(!list2.isEmpty()); //-= should leave other list intact
     assert(list2.getNext(item) && item == "Bob");
@@ -99,6 +104,7 @@ int main() {
     list1.add_to_back("Chumlee");
     int count = list1.remove('C');
     assert(count == 2);
+    list1.reset(); // reset to set iterator to first node
     assert(list1.getNext(item) && item == "David");
     assert(list1.getNext(item) && item == "Eve");
     list1.clear();
@@ -111,6 +117,7 @@ int main() {
     list1.add_to_back("David");
     list1.add_to_back("Eve");
     list1.shift_forward('D');
+    list1.reset(); // reset to set iterator to first node
     assert(list1.getNext(item) && item == "David");
     assert(list1.getNext(item) && (item == "Alice" || item == "Bob" || item == "Charlie" || item == "Eve") );
     assert(list1.getNext(item) && (item == "Alice" || item == "Bob" || item == "Charlie" || item == "Eve") );
@@ -153,6 +160,7 @@ int main() {
 
 	assert(!list1.isEmpty());
 
+    list1.reset(); // reset to set iterator to first node
     for (int i = 99; i >= 0; i--) {
         assert(list1.getNext(item) && item == "Item " + std::to_string(i));
     }
@@ -179,7 +187,7 @@ int main() {
     list1.add_to_back("David");
 
     list1.merge(list1);
-
+    list1.reset(); // reset to set iterator to first node
     assert(list1.getNext(item) && item == "Bob");
     assert(list1.getNext(item) && item == "Eve");
     assert(list1.getNext(item) && item == "John");
@@ -205,6 +213,7 @@ int main() {
     list1.add_to_back("Becky");
 
     list1.shift_forward('B');
+    list1.reset(); // reset to set iterator to first node
     assert(list1.getNext(item) && (item == "Bob" || item == "Barbara" || item == "Becky") );
     assert(list1.getNext(item) && (item == "Bob" || item == "Barbara" || item == "Becky") );
     assert(list1.getNext(item) && (item == "Bob" || item == "Barbara" || item == "Becky") );
@@ -229,6 +238,7 @@ int main() {
     list1.add_to_back("Sam");
     list1.add_to_back("Becky");
 
+    list1.reset(); // reset to set iterator to first node
     assert(list1.getNext(item) && item == "Bob");
     assert(list1.getNext(item) && item == "Eve");
     assert(list1.getNext(item) && item == "Barbara");
@@ -256,7 +266,7 @@ int main() {
     list1.add_to_back("Becky");
 
     list1.remove('B');
-
+    list1.reset(); // reset to set iterator to first node
     assert(list1.getNext(item) && item == "Eve");
     assert(list1.getNext(item) && item == "Sam");
     assert(!list1.getNext(item));
