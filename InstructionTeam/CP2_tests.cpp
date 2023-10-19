@@ -172,7 +172,7 @@ int main() {
     assert(list2.isEmpty());
 
     list1.add_to_back("Bob");
-    list1.add_to_front("Eve");
+    list1.add_to_back("Eve");
 
     list1.add_to_back("John");
     list1.add_to_back("Sam");
@@ -187,7 +187,7 @@ int main() {
     assert(list1.getNext(item) && item == "David");
     assert(!list1.getNext(item));
 
-    std::cout << "All tests passed from section 3";
+    std::cout << "All tests passed from section 3" << std::endl;
 
     //Test case 4 -> 
     //Goal : Shift forward Operation 
@@ -198,7 +198,7 @@ int main() {
     assert(list2.isEmpty());
 
     list1.add_to_back("Bob");
-    list1.add_to_front("Eve");
+    list1.add_to_back("Eve");
 
     list1.add_to_back("Barbara");
     list1.add_to_back("Sam");
@@ -211,7 +211,7 @@ int main() {
     assert(list1.getNext(item) && item == "Eve");
     assert(list1.getNext(item) && item == "Sam");
 
-    std::cout << "All Tests passes from section 4";
+    std::cout << "All Tests passes from section 4" << std::endl;
 
     //Test case 5 ->
     //Goal : isFinished returns true
@@ -222,7 +222,7 @@ int main() {
     assert(list2.isEmpty());
 
     list1.add_to_back("Bob");
-    list1.add_to_front("Eve");
+    list1.add_to_back("Eve");
 
     list1.add_to_back("Barbara");
     list1.add_to_back("Sam");
@@ -230,17 +230,17 @@ int main() {
 
     assert(list1.getNext(item) && item == "Bob");
     assert(list1.getNext(item) && item == "Eve");
-    assert(list1.getNext(item) && item == "John");
+    assert(list1.getNext(item) && item == "Barbara");
     assert(list1.getNext(item) && item == "Sam");
-    assert(list1.getNext(item) && item == "David");
+    assert(list1.getNext(item) && item == "Becky");
     assert(!list1.getNext(item));
 
     assert(list1.finished());
 
-     std::cout << "All Tests passes from section 5";
+    std::cout << "All Tests passes from section 5" << std::endl;
 
-     //Test case 6 ->
-     //Goal : To remove some elements from the list;
+    //Test case 6 ->
+    //Goal : To remove some elements from the list;
      
     list1.clear();
     list2.clear();
@@ -248,7 +248,7 @@ int main() {
     assert(list2.isEmpty());
 
     list1.add_to_back("Bob");
-    list1.add_to_front("Eve");
+    list1.add_to_back("Eve");
 
     list1.add_to_back("Barbara");
     list1.add_to_back("Sam");
@@ -257,12 +257,12 @@ int main() {
     list1.remove('B');
 
     assert(list1.getNext(item) && item == "Eve");
-    assert(list1.getNext(item) && item == "David");
+    assert(list1.getNext(item) && item == "Sam");
     assert(!list1.getNext(item));
 
     assert(list1.finished());
 
-    std::cout << "All Tests passes from section 6";
+    std::cout << "All Tests passes from section 6" << std::endl;
 
     return 0;
 }
